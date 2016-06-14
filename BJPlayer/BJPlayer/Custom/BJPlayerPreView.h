@@ -11,34 +11,37 @@
 #import "BJVideoHeader.h"
 //播放按钮点击block
 typedef void(^playBtnClickBlock) (BOOL isPlay);
+//全频按钮点击block
+typedef void(^fullBtnClickBlock) (BOOL isFullScreen);
 //播放进度条滑动结束block
-typedef void(^mediaSliderValueChangedEndBlock)(CGFloat value);
+typedef void(^mediaSliderValueChangedEndBlock) (CGFloat value);
 //播放进度条滑动时block
 typedef void(^mediaSliderValueChangeBlock) (CGFloat value);
+
 @interface BJPlayerPreView : UIView
 
 /**
  *  播放按钮
  */
-@property(nonatomic,strong)UIButton *playBtn;
+@property(nonatomic,strong,readonly)UIButton *playBtn;
 /**
  *  缓冲进度条
  */
-@property(nonatomic,strong)UIProgressView *mediaProgressView;
+@property(nonatomic,strong,readonly)UIProgressView *mediaProgressView;
 /**
  *  播放进度条
  */
-@property(nonatomic,strong)UISlider*mediaSlider;
+@property(nonatomic,strong,readonly)UISlider*mediaSlider;
 
 /**
  *  播放时间展示label
  */
-@property(nonatomic,strong)UILabel*mediaTimeLabel;
-
+@property(nonatomic,strong,readonly)UILabel*mediaTimeLabel;
 /**
  *  标记是否是用户滑动(解决进度条滑动时出现滑块来回颤抖问题)
  */
-@property(nonatomic,assign)BOOL isUerSlider;
+@property(nonatomic,assign,readonly)BOOL isUerSlider;
+
 /**
  *  快速创建
  *  @return BJPlayerPreView
@@ -56,6 +59,10 @@ typedef void(^mediaSliderValueChangeBlock) (CGFloat value);
  *  播放进度条滑动时回调（进行更新播放时间）
  */
 -(void)mediaSliderValueChangeBlock:(mediaSliderValueChangeBlock)mediaSliderValueChangeBlock;
+/**
+ *  全频回调
+ */
+-(void)fullBtnClickBlock:(fullBtnClickBlock)fullBtnClickBlock;
 /**
  *  展示播放工具条
  */

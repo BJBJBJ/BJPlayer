@@ -14,7 +14,7 @@
 //weakSelf
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 //屏幕
-#define kDeviceWidth [UIScreen mainScreen].bounds.size.width
+#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kDeviceSize   [[UIScreen mainScreen] bounds].size
 

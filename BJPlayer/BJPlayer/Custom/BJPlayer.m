@@ -300,6 +300,15 @@ static BJPlayer *instance=nil;
 -(void)monitorMediaPlayingStatusChangedBlock:(mediaPlayingStatusChangedBlock)mediaPlayingStatusChangedBlock{
     self.mediaPlayingStatusChangedBlock=mediaPlayingStatusChangedBlock;
 }
+
+-(void)fullScreenPlayBack{
+    _playerLayer.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
+}
+
+-(void)recoveryPlayBack{
+    _playerLayer.frame=frame;
+}
+
 #pragma mark-------------------添加or移除KVO，通知及播放器------------------
 /** 添加观察者及通知*/
 -(void)addObserver{

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2C48A7A1D0FB05800AE14B8 /* BJPlayerFullScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C48A791D0FB05800AE14B8 /* BJPlayerFullScreenController.m */; };
 		D2EEEE251D0D0CC400209633 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EEEE241D0D0CC400209633 /* main.m */; };
 		D2EEEE281D0D0CC400209633 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EEEE271D0D0CC400209633 /* AppDelegate.m */; };
 		D2EEEE2B1D0D0CC400209633 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EEEE2A1D0D0CC400209633 /* ViewController.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D2C48A781D0FB05800AE14B8 /* BJPlayerFullScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJPlayerFullScreenController.h; sourceTree = "<group>"; };
+		D2C48A791D0FB05800AE14B8 /* BJPlayerFullScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJPlayerFullScreenController.m; sourceTree = "<group>"; };
 		D2EEEE201D0D0CC300209633 /* BJPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BJPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EEEE241D0D0CC400209633 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2EEEE261D0D0CC400209633 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				D2EEEE601D0D0DBB00209633 /* BJPlayer.m */,
 				D2EEEE651D0D0DBB00209633 /* BJPlayerPreView.h */,
 				D2EEEE661D0D0DBB00209633 /* BJPlayerPreView.m */,
+				D2C48A781D0FB05800AE14B8 /* BJPlayerFullScreenController.h */,
+				D2C48A791D0FB05800AE14B8 /* BJPlayerFullScreenController.m */,
 				D2EEEE671D0D0DBB00209633 /* BJVideoHeader.h */,
 			);
 			path = Custom;
@@ -307,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2EEEE691D0D0DBB00209633 /* UIView+Frame.m in Sources */,
+				D2C48A7A1D0FB05800AE14B8 /* BJPlayerFullScreenController.m in Sources */,
 				D2EEEE6D1D0D0DBB00209633 /* BJPlayerPreView.m in Sources */,
 				D2EEEE2B1D0D0CC400209633 /* ViewController.m in Sources */,
 				D2EEEE6A1D0D0DBB00209633 /* BJPlayer.m in Sources */,

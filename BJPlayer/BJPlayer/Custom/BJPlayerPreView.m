@@ -2,7 +2,7 @@
 //  BJPlayerPreView.m
 //  SmallVideo
 //
-//  Created by zbj-mac on 16/5/30.
+//  Created by zbj-mac on 16/5/25.
 //  Copyright © 2016年 zbj. All rights reserved.
 //
 
@@ -13,6 +13,34 @@
  *  播放工具条
  */
 @property(nonatomic,strong)UIView*playToolView;
+
+/**
+ *  播放按钮
+ */
+@property(nonatomic,strong,readwrite)UIButton *playBtn;
+/**
+ *  缓冲进度条
+ */
+@property(nonatomic,strong,readwrite)UIProgressView *mediaProgressView;
+/**
+ *  播放进度条
+ */
+@property(nonatomic,strong,readwrite)UISlider*mediaSlider;
+
+/**
+ *  播放时间展示label
+ */
+@property(nonatomic,strong,readwrite)UILabel*mediaTimeLabel;
+/**
+ *  全屏按钮
+ */
+@property(nonatomic,strong,readwrite)UIButton*fullBtn;
+
+/**
+ *  标记是否是用户滑动(解决进度条滑动时出现滑块来回颤抖问题)
+ */
+@property(nonatomic,assign)BOOL isUerSlider;
+
 /**
  *  小菊花
  */
@@ -21,6 +49,7 @@
 @property(nonatomic,copy)playBtnClickBlock playBtnClickBlock;
 @property(nonatomic,copy)mediaSliderValueChangedEndBlock mediaSliderValueChangedEndBlock;
 @property(nonatomic,copy)mediaSliderValueChangeBlock mediaSliderValueChangeBlock;
+@property(nonatomic,copy)fullBtnClickBlock fullBtnClickBlock;
 @end
 @implementation BJPlayerPreView
 #pragma mark------------------懒加载-----------------
@@ -44,6 +73,18 @@
         [_playBtn setTitle:@"stop" forState:UIControlStateSelected];
     }
     return _playBtn;
+}
+-(UIButton *)fullBtn{
+    if (!_fullBtn) {
+        _fullBtn=[[UIButton alloc] init];
+        _fullBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+        [_fullBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        [_fullBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+        [_fullBtn addTarget:self action:@selector(fullBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_fullBtn setTitle:@"full" forState:UIControlStateNormal];
+
+    }
+    return _fullBtn;
 }
 //缓冲进度条
 -(UIProgressView *)mediaProgressView{
@@ -98,6 +139,7 @@
         [self.playToolView addSubview:self.mediaProgressView];
         [self.playToolView addSubview:self.mediaSlider];
         [self.playToolView addSubview:self.mediaTimeLabel];
+        [self.playToolView addSubview:self.fullBtn];
         [self hiddenPlayToolView];
         [self showHUD];
     }
@@ -110,9 +152,10 @@
     self.playToolView.frame=CGRectMake(0, self.height-40, self.width, 40);
     self.loading.center=CGPointMake(self.width*0.5, self.height*0.5);
     self.playBtn.frame=CGRectMake(10, 5, 30, 30);
-    self.mediaSlider.frame=CGRectMake(self.playBtn.right+5,5, kDeviceWidth-2*(self.playBtn.width+20), 30);
+    self.mediaSlider.frame=CGRectMake(self.playBtn.right+5,5, kDeviceWidth-3*(self.playBtn.width+20), 30);
     self.mediaProgressView.frame=CGRectMake(self.mediaSlider.x, 0, self.mediaSlider.width, 2);
-    self.mediaTimeLabel.frame=CGRectMake(self.mediaSlider.right+5, 0, kDeviceWidth-self.mediaSlider.right-10, 30);
+    self.mediaTimeLabel.frame=CGRectMake(self.mediaSlider.right+5, 0, kDeviceWidth-self.mediaSlider.right-45, 30);
+    self.fullBtn.frame=CGRectMake(self.mediaTimeLabel.right+5, 5, 30, 30);
     self.mediaProgressView.centerY=self.mediaSlider.centerY;
     self.playBtn.centerY=self.mediaSlider.centerY;
     self.mediaTimeLabel.centerY=self.mediaSlider.centerY-2;
@@ -122,7 +165,10 @@
     btn.selected=!btn.selected;
     !self.playBtnClickBlock?:self.playBtnClickBlock(btn.selected);
 }
-
+-(void)fullBtnClicked:(UIButton*)btn{
+    btn.selected=!btn.selected;
+    !self.fullBtnClickBlock?:self.fullBtnClickBlock(btn.selected);
+}
 -(void)mediaSliderValueChanged:(UISlider*)slider{
     self.isUerSlider=NO;
     self.playBtn.selected=!self.playBtn.selected?:!self.playBtn.selected;
@@ -146,6 +192,9 @@
 -(void)mediaSliderValueChangeBlock:(mediaSliderValueChangeBlock)mediaSliderValueChangeBlock{
     self.mediaSliderValueChangeBlock=mediaSliderValueChangeBlock;
 }
+-(void)fullBtnClickBlock:(fullBtnClickBlock)fullBtnClickBlock{
+    self.fullBtnClickBlock=fullBtnClickBlock;
+}
 -(void)showPalyToolView{
     self.playToolView.hidden=NO;
 }
@@ -162,6 +211,16 @@
     [self.loading stopAnimating];
 }
 
+
+-(void)fullScreenPlayback{
+    self.layer.transform = CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
+    self.layer.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
+}
+-(void)recoveryPlayback{
+    self.layer.transform = CATransform3DIdentity;
+    self.layer.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
+
+}
 @end
 
 

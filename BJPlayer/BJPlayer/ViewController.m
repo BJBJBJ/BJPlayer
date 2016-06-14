@@ -9,10 +9,12 @@
 #import "ViewController.h"
 #import "BJPlayer.h"
 #import "BJPlayerPreView.h"
+#import "BJPlayerFullScreenController.h"
 @interface ViewController ()
 
 @property(nonatomic,strong) BJPlayer *player;
 @property(nonatomic,strong) BJPlayerPreView  *playerPreView;
+@property(nonatomic,strong) BJPlayerFullScreenController *fullVC;
 @end
 
 @implementation ViewController
@@ -29,6 +31,12 @@
         _playerPreView.backgroundColor=[UIColor blackColor];
     }
     return _playerPreView;
+}
+-(BJPlayerFullScreenController *)fullVC{
+    if (!_fullVC) {
+        _fullVC=[[BJPlayerFullScreenController alloc] init];
+    }
+    return _fullVC;
 }
 /**
  *  配置播放参数
@@ -124,6 +132,30 @@
         }];
     }];
     
+    //全屏回调
+    [self.playerPreView fullBtnClickBlock:^(BOOL isFullScreen) {
+        if (isFullScreen) {
+   
+            [self presentViewController:self.fullVC animated:nil completion:^{
+                self.playerPreView.frame=self.fullVC.view.bounds;
+            
+                [self.fullVC.view addSubview:self.playerPreView];
+                [self.player fullScreenPlayBack];
+                
+            }];
+
+        }else{
+            
+            [self.fullVC dismissViewControllerAnimated:nil completion:^{
+                self.playerPreView.frame=CGRectMake(0, 200, kDeviceWidth, 200);
+                self.playerPreView.layer.frame=CGRectMake(0, 200, kDeviceWidth, 200);
+                [self.view addSubview:self.playerPreView];
+                [self.player recoveryPlayBack];
+                
+            }];
+        }
+        
+    }];
 }
 
 - (void)viewDidLoad {

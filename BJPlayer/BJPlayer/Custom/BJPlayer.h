@@ -107,4 +107,12 @@ typedef void(^mediaPlayingStatusChangedBlock) (BJPlayerStatus status);
  *  移除播放器
  */
 -(void)remove;
+/**
+ *  全屏播放
+ */
+-(void)fullScreenPlayBack;
+/**
+ *  复原播放
+ */
+-(void)recoveryPlayBack;
 @end
