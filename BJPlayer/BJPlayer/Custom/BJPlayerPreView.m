@@ -212,15 +212,7 @@
 }
 
 
--(void)fullScreenPlayback{
-    self.layer.transform = CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
-    self.layer.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
-}
--(void)recoveryPlayback{
-    self.layer.transform = CATransform3DIdentity;
-    self.layer.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
 
-}
 @end
 
 
