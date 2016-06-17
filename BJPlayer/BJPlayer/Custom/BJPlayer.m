@@ -16,7 +16,7 @@ static  NSString * const kPlaybackLikelyToKeepUpKey     =@"playbackLikelyToKeepU
 {
     //预览层相关
     CGRect   frame;
-    CALayer *playLayer;
+    CALayer *playerPreViewLayer;
 }
 /**
  *  播放器
@@ -160,7 +160,7 @@ static  NSString * const kPlaybackLikelyToKeepUpKey     =@"playbackLikelyToKeepU
 -(void)configurationPlayerInfo{
     //防止二次配置参数 用户无论先配置播放预览还是配置播放源 确保配置一次
     //未配置播放预览层
-    if (!playLayer)return;
+    if (!playerPreViewLayer)return;
     //未配置播放源URL
     if (!self.mediaUrl) return;
   
@@ -179,7 +179,7 @@ static  NSString * const kPlaybackLikelyToKeepUpKey     =@"playbackLikelyToKeepU
         self.player =[AVPlayer playerWithPlayerItem:playItem];
     }
     
-     [playLayer insertSublayer:self.playerLayer atIndex:0];
+     [playerPreViewLayer insertSublayer:self.playerLayer atIndex:0];
       //添加通知及观察者
      [self addObserver];
 }
@@ -249,7 +249,7 @@ static BJPlayer *instance=nil;
     if (!configurationPlayLayerBlock) return;
     CALayer *layer;
     configurationPlayLayerBlock(&frame,&layer);
-    if (layer) {playLayer=layer;}
+    if (layer) {playerPreViewLayer=layer;}
 
     [self configurationPlayerInfo];
 }
@@ -302,10 +302,12 @@ static BJPlayer *instance=nil;
 }
 
 -(void)fullScreenPlayBack{
+//    _playerLayer.transform=CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
     _playerLayer.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
 }
 
 -(void)recoveryPlayBack{
+//     _playerLayer.transform = CATransform3DIdentity;
     _playerLayer.frame=frame;
 }
 

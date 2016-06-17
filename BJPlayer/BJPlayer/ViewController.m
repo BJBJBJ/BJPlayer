@@ -138,7 +138,6 @@
    
             [self presentViewController:self.fullVC animated:nil completion:^{
                 self.playerPreView.frame=self.fullVC.view.bounds;
-            
                 [self.fullVC.view addSubview:self.playerPreView];
                 [self.player fullScreenPlayBack];
                 
@@ -148,7 +147,6 @@
             
             [self.fullVC dismissViewControllerAnimated:nil completion:^{
                 self.playerPreView.frame=CGRectMake(0, 200, kDeviceWidth, 200);
-                self.playerPreView.layer.frame=CGRectMake(0, 200, kDeviceWidth, 200);
                 [self.view addSubview:self.playerPreView];
                 [self.player recoveryPlayBack];
                 

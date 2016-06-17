@@ -9,16 +9,15 @@
 #import "BJPlayerFullScreenController.h"
 
 @implementation BJPlayerFullScreenController
-- (instancetype)init {
-    
-    if (self = [super init]) {
-        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+-(instancetype)init{
+    if (self=[super init]) {
+        self.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
     }
     return self;
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
     
-    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+    return UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
 }
 @end
